@@ -47,7 +47,18 @@ int main(int ac, char **av, char **env)
 		 builtin(argv);
 		 if (strcmp(argv[0], "exit") == 0)
 		 {
+			 if (argv[1] == NULL)
+			 {
+				 free(buffer);
+				 exit(0);
+			 }
 			 exitstat = atoi(argv[1]);
+			 if (exitstat < 0)
+			 {
+				free(buffer);
+				printf("./hsh: 1:exit:Illegal number: %d\n", exitstat);
+				exit(2);
+			 }
 			 free(buffer);
 			exit(exitstat);
 		 }
