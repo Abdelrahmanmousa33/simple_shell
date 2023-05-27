@@ -9,7 +9,7 @@
 int main(int ac, char **av, char **env)
 {
 	char *buffer = NULL, *argv[10], *prompt = "## ", *command;
-	int chars_red = 0, status;
+	int chars_red = 0, status, exitstat;
 	size_t buf_size = 0;
 	pid_t child;
 	bool mode_check = false;
@@ -47,8 +47,9 @@ int main(int ac, char **av, char **env)
 		 builtin(argv);
 		 if (strcmp(argv[0], "exit") == 0)
 		 {
+			 exitstat = atoi(argv[1]);
 			 free(buffer);
-			exit(atoi(argv[1]));
+			exit(exitstat);
 		 }
 		command = _path(argv[0]);
 		if (command == NULL)
