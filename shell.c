@@ -40,7 +40,8 @@ int main(int ac, char **av, char **env)
 		str_tok(buffer, argv);
 		if (argv[0] == NULL || _strlen(argv[0]) == 0)
 			continue;
-		if (builtin(argv, buffer) == 1)
+		 builtin(argv);
+		 if (strcmp(argv[0], "exit") == 0)
 			exit(atoi(argv[1]));
 		command = _path(argv[0]);
 		if (command == NULL)
