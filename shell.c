@@ -46,7 +46,10 @@ int main(int ac, char **av, char **env)
 			continue;
 		 builtin(argv);
 		 if (strcmp(argv[0], "exit") == 0)
+		 {
+			 free(buffer);
 			exit(atoi(argv[1]));
+		 }
 		command = _path(argv[0]);
 		if (command == NULL)
 		{
