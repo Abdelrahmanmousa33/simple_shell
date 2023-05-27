@@ -17,7 +17,10 @@ int main(int ac, char **av, char **env)
 	argv[9] = NULL;
 	
 	if (ac > 1)
+	{
 		write(STDOUT_FILENO, "usage ./hsh", 11);
+		exit(0);
+	}
 	while (1)
 	{
 		fflush(stdout);
