@@ -15,10 +15,11 @@ int main(int ac, char **av, char **env)
 	bool mode_check = false;
 
 	argv[9] = NULL;
+	
+	if (ac > 1)
+		write(STDOUT_FILENO, "usage ./hsh", 11);
 	while (1)
 	{
-		if (ac != 1)
-			write(STDOUT_FILENO, "usage ./hsh", 11);
 		fflush(stdout);
 		if (mode_check == false)
 		{
