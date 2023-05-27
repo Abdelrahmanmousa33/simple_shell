@@ -8,7 +8,7 @@
  */
 int main(int ac, char **av, char **env)
 {
-	char *buffer = NULL, *argv[10], *prompt = "## ";
+	char *buffer = NULL, *argv[10], *prompt = "## ", *command;
 	int chars_red = 0, status;
 	size_t buf_size = 0;
 	pid_t child;
@@ -41,9 +41,16 @@ int main(int ac, char **av, char **env)
 		if (argv[0] == NULL || _strlen(argv[0]) == 0)
 			continue;
 		builtin(argv, buffer);
+		command = _path(argv[0]);
+		if (command == NULL)
+		{
+			 printf("%s:%s:no such file or directory\n", av[0], argv[0]);
+			continue;
+		}
 		child = _fork(buffer);
 		if (child == 0)
-			_execve(argv, av, env);
+			_execve(command, argv, av, env);
 		waitpid(child, &status, 0);
+		free(command);
 	}
 }
